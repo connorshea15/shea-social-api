@@ -9,11 +9,12 @@ const {
 
 router
     .route('/')
-    .get(getAllThoughts);
+    .get(getAllThoughts)
+    .post(createThought);
 
-router
+/*router
     .route('/:userId')
-    .post(createThought)
+    .post(createThought) */
 
     router
     .route('/:thoughtId')
