@@ -30,6 +30,11 @@ const UserSchema = new Schema(
     }
   );
 
+UserSchema.path('email').validate(function (email) {
+    var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    return emailRegex.test(String(email));
+}, 'The email you provided is not properly formatted.')
+
   const User = model('User', UserSchema);
 
   module.exports = User;
