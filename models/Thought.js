@@ -1,27 +1,38 @@
 const { Schema, model, Types } = require('mongoose');
 const moment = require('moment');
 
-const CommentSchema = new Schema(
+const ThoughtSchema = new Schema(
     {
-        writtenBy: {
-            type: String
-        },
         thoughtText: {
             type: String,
-            required: true
+            required: true,
+            min: 1,
+            max: 280
         },
         createdAt: {
             type: Date,
             default: Date.now,
             get: createdAtVal => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
         },
-        // use ReplySchema to validate data for a reply
+        username: {
+            type: String,
+            required: true
         },
-        {
+        reactions: []
+    },
+    {
         toJSON: {
             virtuals: true,
             getters: true
         },
         id: false
-        }
+    }
 );
+
+ThoughtSchema.virtual('reactionCount').get(function() {
+    return this.reactions.length;
+  });
+
+const Thought = model('Thought', ThoughtSchema);
+
+module.exports = Thought;
