@@ -16,10 +16,10 @@ const UserSchema = new Schema(
       },
       friends: [],
       thoughts: [
-        /*{
+        {
           type: Schema.Types.ObjectId,
           ref: 'Thought'
-        } */
+        }
       ]
     },
     {
